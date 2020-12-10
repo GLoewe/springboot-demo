@@ -9,13 +9,13 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "students")
-public class Student extends AuditModel {
+@Table(name = "spieler")
+public class Spieler extends AuditModel {
     @Id
-    @GeneratedValue(generator = "student_generator")
+    @GeneratedValue(generator = "spieler_generator")
     @SequenceGenerator(
-            name = "student_generator",
-            sequenceName = "student_sequence",
+            name = "spieler_generator",
+            sequenceName = "spieler_sequence",
             initialValue = 1000
     )
     private Long id;
@@ -27,10 +27,10 @@ public class Student extends AuditModel {
     private String lastname;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "course_id", nullable = false)
+    @JoinColumn(name = "team_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Course course;
+    private Team team;
 
     public Long getId() {
         return id;
@@ -56,11 +56,12 @@ public class Student extends AuditModel {
         this.lastname = lastname;
     }
 
-    public Course getCourse() {
-        return course;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
+
